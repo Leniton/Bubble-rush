@@ -51,10 +51,14 @@ public class PlayerController : MonoBehaviour
         if(mov.estado == Plataform_Movement.Estado.andando)
         {
             anim.SetBool("Walking", true);
-        }else if (mov.estado == Plataform_Movement.Estado.parado)
+        }else if (mov.estado != Plataform_Movement.Estado.andando)
         {
             anim.SetBool("Walking", false);
         }
+		if(mov.jump == true)
+        anim.SetTrigger("Jump");
+		
+		anim.SetBool("Jumping", mov.estado == Plataform_Movement.Estado.pulando);
     }
 
     IEnumerator Dropping()
@@ -62,7 +66,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if (Input.GetKey(KeyCode.S) && mov.chaoPisado.GetComponent<PlatformEffector2D>() != null){
             gameObject.layer = 1;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.8f);
             gameObject.layer = 11;
         }
     }

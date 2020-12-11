@@ -22,7 +22,17 @@ public class Menu_Script : MonoBehaviour
 	
 	IEnumerator Delayed(int n)
     {
-        yield return new WaitForSeconds(0.5f);
+		//yield return new WaitForSeconds(0.5f);
+
+		float time = 0;
+
+        do
+        {
+			yield return null;
+			time += Time.unscaledDeltaTime;
+
+        } while (time < 0.8f);
+
 		Scene_Manager.manager.LoadScene(n);
 	}
 }
